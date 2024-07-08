@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-export PYOPENGL_PLATFORM=opengl
+#export PYOPENGL_PLATFORM=opengl
 #export DISPLAY=:0.0
+ngpus=1
+mincpus=16
 export PERACT_ROOT=$HOME/peract_dir/peract
 
 if [ $# -eq 0 ]
   then
     echo "Collecting demos from all tasks"
-
     tasks=("basketball_in_hoop"
            "close_box"
            "close_laptop_lid"
@@ -35,7 +36,7 @@ fi
 # idx from which to collect demos (use -1 for all idxs)
 IDX_TO_COLLECT=13 #RLBench variations only
 
-SAVE_PATH=$HOME/data/colosseum_training_dataset
+#SAVE_PATH=$HOME/data/colosseum_training_dataset
 NUMBER_OF_EPISODES=100
 IMAGE_SIZE=(256 256)
 MAX_ATTEMPTS=20
@@ -53,28 +54,19 @@ CAMERAS_USE_OVERHEAD="False"
 CAMERAS_USE_WRIST="True"
 CAMERAS_USE_FRONT="True"
 
+    #--container-mounts $HOME/robot-colosseum:/home/jeszhang/robot-colosseum,$HOME/data/:/home/jeszhang/data/,/tmp/.X11-unix:/tmp/.X11-unix,$HOME/.Xauthority:/home/.Xauthority \
+                #bash -c "cd ../robot-colosseum && conda run --no-capture-output -n 3d_diffuser_actor xvfb-run -a /bin/bash collect_training_dataset.sh $task"
+	#bash -c "cd ../robot-colosseum && xvfb-run -a bash collect_training_dataset.sh $task"
+                #--partition=grizzly,polar,polar2,polar3,polar4,batch_singlenode,interactive \ # grizzly seems to have issues with display
 for task in "${tasks[@]}"
 do
-    echo "Processing task: $task"
-    TASK_STRING="python -m colosseum.tools.dataset_generator --config-name $task \
-            env.seed=$SEED \
-            data.save_path=$SAVE_PATH \
-            +data.max_attempts=$MAX_ATTEMPTS \
-            +data.idx_to_collect=$IDX_TO_COLLECT \
-            +data.use_save_states=$USE_SAVE_STATES \
-            data.image_size=[${IMAGE_SIZE[0]},${IMAGE_SIZE[1]}] \
-            data.episodes_per_task=$NUMBER_OF_EPISODES \
-            data.images.rgb=$IMAGES_USE_RGB \
-            data.images.depth=$IMAGES_USE_DEPTH \
-            data.images.mask=$IMAGES_USE_MASK \
-            data.images.point_cloud=$IMAGES_USE_POINTCLOUD \
-            data.cameras.left_shoulder=$CAMERAS_USE_LEFT_SHOULDER \
-            data.cameras.right_shoulder=$CAMERAS_USE_RIGHT_SHOULDER \
-            data.cameras.overhead=$CAMERAS_USE_OVERHEAD \
-            data.cameras.wrist=$CAMERAS_USE_WRIST \
-            data.cameras.front=$CAMERAS_USE_FRONT"
-    srun -A nvr_srl_simpler --partition=interactive --gpus=1 \
-    --container-image=/lustre/fsw/portfolios/nvr/users/$USER/cache/srl_jesse_3d_diffuser_image.sqsh \
-    --container-mounts $HOME/robot-colosseum:/home/jeszhang/robot-colosseum,$HOME/data/:/home/jeszhang/data/ 
-    --pty bash -c "conda activate 3d_diffuser_actor && cd robot-colosseum && bash $TASK_STRING" &
+    srun -A nvr_srl_simpler --gres gpu:$ngpus \
+                --mincpus=$mincpus \
+                --nodes=1 \
+                --partition=polar,polar2,polar3,polar4,interactive \
+                --time=4:0:0 \
+                --mem=64G \
+                --container-image /lustre/fsw/portfolios/nvr/users/$USER/cache/srl_jesse_3d_diffuser_image.sqsh \
+                --container-mounts $HOME/robot-colosseum/collect_training_dataset.sh:/home/jeszhang/robot-colosseum/collect_training_dataset.sh,/home/jeszhang/data/:/home/jeszhang/data/,/usr/bin/nvidia-xconfig:/usr/bin/nvidia-xconfig \
+                bash -c "cd ../robot-colosseum && xvfb-run -a conda run --no-capture-output -n 3d_diffuser_actor bash collect_training_dataset.sh $task" &
 done

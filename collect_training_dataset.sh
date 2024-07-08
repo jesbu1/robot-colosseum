@@ -33,11 +33,10 @@ else
 fi
 
 # idx from which to collect demos (use -1 for all idxs)
-IDX_TO_COLLECT=-1
+IDX_TO_COLLECT=13 #RLBench variations only
 
-#SAVE_PATH=$HOME/data/colosseum_dataset
-SAVE_PATH=/home/jeszhang/data/test_dataset
-NUMBER_OF_EPISODES=25
+SAVE_PATH=/home/jeszhang/data/colosseum_training_dataset
+NUMBER_OF_EPISODES=100
 IMAGE_SIZE=(256 256)
 MAX_ATTEMPTS=20
 SEED=42
@@ -56,7 +55,6 @@ CAMERAS_USE_FRONT="True"
 
 for task in "${tasks[@]}"
 do
-    echo "Processing task: $task"
     python -m colosseum.tools.dataset_generator --config-name $task \
             env.seed=$SEED \
             data.save_path=$SAVE_PATH \
