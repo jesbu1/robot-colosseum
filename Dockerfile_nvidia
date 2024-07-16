@@ -1,4 +1,5 @@
-FROM nvidia/opengl:1.2-glvnd-devel-ubuntu20.04
+#FROM nvidia/opengl:1.2-glvnd-devel-ubuntu20.04
+FROM nvidia/cuda:11.6.1-devel-ubuntu20.04
 
 RUN :\
     && apt-get update -q \
@@ -40,7 +41,7 @@ ENV QT_QPA_PLATFORM_PLUGIN_PATH=${COPPELIASIM_ROOT}
 RUN :\
     && cd ${HOME} \
     && virtualenv venv && . venv/bin/activate \
-    && git clone https://github.com/stepjam/PyRep.git ${HOME}/pyrep && cd pyrep \
+    && git clone https://github.com/stepjam/PyRep.git pyrep && cd pyrep \
     && git checkout 4.1.0 \
     && pip install -r requirements.txt \
     && pip install . \
