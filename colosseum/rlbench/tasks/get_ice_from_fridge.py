@@ -48,3 +48,6 @@ class GetIceFromFridge(Task):
         self,
     ) -> Tuple[Tuple[float, float, float], Tuple[float, float, float]]:
         return (0.0, 0.0, -np.pi / 4), (0.0, 0.0, np.pi / 4)
+
+    def get_ice_from_fridge(self) -> Tuple[str]:
+        return ("cup", "fridge_base")

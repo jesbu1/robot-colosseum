@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple 
 
 from pyrep.objects.joint import Joint
 from rlbench.backend.conditions import JointCondition
@@ -19,3 +19,6 @@ class CloseLaptopLid(Task):
 
     def variation_count(self) -> int:
         return 1
+
+    def get_important_objects(self) -> Tuple[str]:
+        return ("base_visual", "lid_visual")

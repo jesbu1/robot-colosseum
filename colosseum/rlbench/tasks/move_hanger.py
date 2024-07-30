@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from pyrep.objects.proximity_sensor import ProximitySensor
 from pyrep.objects.shape import Shape
@@ -32,3 +32,6 @@ class MoveHanger(Task):
 
     def is_static_workspace(self) -> bool:
         return True
+
+    def get_important_objects(self) -> Tuple[str]:
+        return (self.hanger.get_name(),)

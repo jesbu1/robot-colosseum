@@ -46,3 +46,6 @@ class BasketballInHoop(Task):
 
     def boundary_root(self) -> Object:
         return Shape("basket_boundary_root")
+
+    def get_important_objects(self) -> Tuple[str]:
+        return ("ball", "basket_ball_hoop_respondable")

@@ -30,3 +30,6 @@ class CloseBox(Task):
         self,
     ) -> Tuple[Tuple[float, float, float], Tuple[float, float, float]]:
         return (0, 0, -np.pi / 8), (0, 0, np.pi / 8)
+
+    def get_important_objects(self) -> Tuple[str]:
+        return ("box_base", "box_lid")

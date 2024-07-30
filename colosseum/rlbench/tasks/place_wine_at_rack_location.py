@@ -79,3 +79,6 @@ class PlaceWineAtRackLocation(Task):
         self,
     ) -> Tuple[Tuple[float, float, float], Tuple[float, float, float]]:
         return (0, 0, -np.pi / 4.0), (0, 0, np.pi / 4.0)
+
+    def get_important_objects(self) -> Tuple[str]:
+        return (self.wine_bottle.get_name(), f"success_{self.locations[self._variation_index]}")

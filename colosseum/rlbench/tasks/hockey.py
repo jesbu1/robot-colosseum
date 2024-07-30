@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from pyrep.objects.proximity_sensor import ProximitySensor
 from pyrep.objects.shape import Shape
@@ -50,3 +50,6 @@ class Hockey(Task):
 
     def variation_count(self) -> int:
         return 1
+
+    def get_important_objects(self) -> Tuple[str]:
+        return ("hockey_stick", "hockey_ball", "hockey_goal")

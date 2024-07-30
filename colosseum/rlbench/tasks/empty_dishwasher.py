@@ -52,3 +52,6 @@ class EmptyDishwasher(Task):
 
     def boundary_root(self) -> Object:
         return Shape("boundary_root")
+
+    def get_important_objects(self) -> Tuple[str]:
+        return ("dishwasher_plate", "dishwasher_tray", "dishwasher_door_joint", "dishwasher_tray_joint")

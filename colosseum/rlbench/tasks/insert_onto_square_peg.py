@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 from pyrep.objects import Dummy
@@ -13,6 +13,7 @@ from rlbench.const import colors
 class InsertOntoSquarePeg(Task):
     def init_task(self) -> None:
         self._square_ring = Shape("square_ring")
+        self.__chosen_pillar = None
         self._success_centre = Dummy("success_centre")
         success_detectors = [
             ProximitySensor("success_detector%d" % i) for i in range(4)
@@ -29,10 +30,10 @@ class InsertOntoSquarePeg(Task):
     def init_episode(self, index: int) -> List[str]:
         color_name, color_rgb = colors[index]
         spokes = [Shape("pillar0"), Shape("pillar1"), Shape("pillar2")]
-        chosen_pillar = np.random.choice(spokes)  # type: ignore
-        chosen_pillar.set_color(color_rgb)
+        self._chosen_pillar = np.random.choice(spokes)  # type: ignore
+        self._chosen_pillar.set_color(color_rgb)
         _, _, z = self._success_centre.get_position()
-        x, y, _ = chosen_pillar.get_position()
+        x, y, _ = self._chosen_pillar.get_position()
         self._success_centre.set_position([x, y, z])
 
         color_choices = np.random.choice(
@@ -40,7 +41,7 @@ class InsertOntoSquarePeg(Task):
             size=2,
             replace=False,
         )
-        spokes.remove(chosen_pillar)
+        spokes.remove(self._chosen_pillar)
         for spoke, i in zip(spokes, color_choices):
             name, rgb = colors[i]
             spoke.set_color(rgb)
@@ -54,3 +55,8 @@ class InsertOntoSquarePeg(Task):
 
     def variation_count(self) -> int:
         return len(colors)
+
+
+    def get_important_objects(self) -> Tuple[str]:
+        assert self._chosen_pillar is not None, "must init_task first before calling get_important_objects"
+        return ("square_ring", self._chosen_pillar.get_name())
