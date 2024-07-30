@@ -34,3 +34,7 @@ class TurnOvenOn(Task):
 
     def boundary_root(self) -> Object:
         return Shape("turn_oven_on_boundary_root")
+
+    def get_important_objects(self) -> Tuple[str]:
+        # TODO: probably need to have more than just the oven knob? idk
+        return ("oven_knob_joint")

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 from pyrep.objects.proximity_sensor import ProximitySensor
@@ -59,3 +59,6 @@ class StackCups(Task):
 
     def variation_count(self) -> int:
         return len(colors)
+
+    def get_important_objects(self) -> Tuple[str]:
+        return (self.cup1.get_name(), self.cup2.get_name(), self.cup3.get_name())

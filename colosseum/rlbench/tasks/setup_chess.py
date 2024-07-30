@@ -1,5 +1,5 @@
 import random
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 from pyrep.objects.dummy import Dummy
@@ -141,3 +141,8 @@ class SetupChess(Task):
 
     def _repeat(self):
         return self.placed + 1 < self.nsetup
+
+    def get_important_objects(self) -> Tuple[str]:
+        success_detectors = [detector.get_name() for detector in self.success_detectors[self.indices]]
+        target_pieces = [target.get_name() for target in self.targets]
+        return (*success_detectors, *target_pieces)

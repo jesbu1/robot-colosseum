@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from pyrep.const import PrimitiveShape
 from pyrep.objects.object import Object
@@ -70,3 +70,8 @@ class WipeDesk(Task):
             )
             self.dirt_spots.append(spot)
         self.b.clear()
+
+    def get_important_objects(self) -> Tuple[str]:
+        # TODO: verify dirt boundary and dirt spots. Might not need dirt boundary or vice versa.
+        dirt_spot_names = [d.get_name() for d in self.dirt_spots]
+        return (self.sponge.get_name(), *dirt_spot_names, self.b[0].get_name())

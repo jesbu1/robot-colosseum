@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from pyrep.objects.proximity_sensor import ProximitySensor
 from pyrep.objects.shape import Shape
@@ -45,3 +45,6 @@ class ScoopWithSpatula(Task):
 
     def variation_count(self) -> int:
         return 1
+
+    def get_important_objects(self) -> Tuple[str]:
+        return (self._spatula.get_name(), self._cuboid.get_name())

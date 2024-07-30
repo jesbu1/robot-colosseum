@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from pyrep.objects.proximity_sensor import ProximitySensor
 from pyrep.objects.shape import Shape
@@ -32,3 +32,7 @@ class StraightenRope(Task):
 
     def variation_count(self) -> int:
         return 1
+
+    def get_important_objects(self) -> Tuple[str]:
+        # TODO: probably need to have the whole rope...
+        return ("head", "tail")
