@@ -73,3 +73,7 @@ class PutMoneyInSafe(Task):
         self,
     ) -> Tuple[Tuple[float, float, float], Tuple[float, float, float]]:
         return (0.0, 0.0, 0.0), (0.0, 0.0, +0.5 * np.pi)
+
+    def get_important_objects(self) -> Tuple[str]:
+        # there's dummy shelves but they are just points, and the succes_detectors are too small to use as full shelves
+        return (self.money.get_name(), "safe_body")

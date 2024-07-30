@@ -34,4 +34,5 @@ class MoveHanger(Task):
         return True
 
     def get_important_objects(self) -> Tuple[str]:
+        # the racks are not even visible, so just showing the hanger
         return (self.hanger.get_name(),)

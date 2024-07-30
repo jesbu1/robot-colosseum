@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from pyrep.objects.proximity_sensor import ProximitySensor
 from pyrep.objects.shape import Shape
@@ -52,3 +52,10 @@ class ReachAndDrag(Task):
 
     def variation_count(self) -> int:
         return len(colors)
+
+    
+    def get_important_objects(self) -> Tuple[str]:
+        #return (self.stick.get_name(), self.cube.get_name(), self.target.get_name(), "success0")
+        # the target is too flat, it doesn't appear when used as bb for cropping in 3d, using "success0" instead 
+        # but success0 doesn't fully cover the target all the way.
+        return (self.stick.get_name(), self.cube.get_name(), "success0")
