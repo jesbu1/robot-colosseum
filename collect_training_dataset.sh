@@ -38,7 +38,7 @@ IDX_TO_COLLECT=13 #RLBench variations only
 SAVE_PATH=/home/jeszhang/data/colosseum_training_dataset
 NUMBER_OF_EPISODES=100
 IMAGE_SIZE=(256 256)
-MAX_ATTEMPTS=20
+MAX_ATTEMPTS=100
 SEED=42
 USE_SAVE_STATES="True"
 
@@ -46,6 +46,7 @@ IMAGES_USE_RGB="True"
 IMAGES_USE_DEPTH="True"
 IMAGES_USE_MASK="True"
 IMAGES_USE_POINTCLOUD="False"
+SAVE_OBJECT_BOUNDING_BOXES="True"
 
 CAMERAS_USE_LEFT_SHOULDER="True"
 CAMERAS_USE_RIGHT_SHOULDER="True"
@@ -67,6 +68,7 @@ do
             data.images.depth=$IMAGES_USE_DEPTH \
             data.images.mask=$IMAGES_USE_MASK \
             data.images.point_cloud=$IMAGES_USE_POINTCLOUD \
+            data.object_bounding_boxes=$SAVE_OBJECT_BOUNDING_BOXES \
             data.cameras.left_shoulder=$CAMERAS_USE_LEFT_SHOULDER \
             data.cameras.right_shoulder=$CAMERAS_USE_RIGHT_SHOULDER \
             data.cameras.overhead=$CAMERAS_USE_OVERHEAD \

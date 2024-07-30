@@ -211,6 +211,8 @@ class ObservationConfigExt(ObservationConfig):
             else RenderMode.OPENGL
         )
 
+        self.object_bounding_boxes = data.object_bounding_boxes
+
 
 def check_and_make(folder: str) -> None:
     if not os.path.exists(folder):
