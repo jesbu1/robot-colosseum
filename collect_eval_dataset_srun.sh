@@ -48,6 +48,6 @@ do
                 --time=4:0:0 \
                 --mem=64G \
                 --container-image /lustre/fsw/portfolios/nvr/users/$USER/cache/srl_jesse_3d_diffuser_image.sqsh \
-                --container-mounts $HOME/robot-colosseum/collect_eval_dataset.sh:/home/jeszhang/robot-colosseum/collect_eval_dataset.sh,/home/jeszhang/data/:/home/jeszhang/data/,/usr/bin/nvidia-xconfig:/usr/bin/nvidia-xconfig \
+                --container-mounts $HOME/robot-colosseum/collect_training_dataset.sh:/home/jeszhang/robot-colosseum/collect_training_dataset.sh,/home/jeszhang/data/:/home/jeszhang/data/,/usr/bin/nvidia-xconfig:/usr/bin/nvidia-xconfig,/home/jeszhang/3d_diffuser_actor/RLBench:/home/jeszhang/3d_diffuser_actor/RLBench \
                 bash -c "cd ../robot-colosseum && xvfb-run -a conda run --no-capture-output -n 3d_diffuser_actor bash collect_eval_dataset.sh $task" &
 done
