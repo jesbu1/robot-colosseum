@@ -34,26 +34,7 @@ else
 fi
 
 # idx from which to collect demos (use -1 for all idxs)
-IDX_TO_COLLECT=-1 #RLBench variations only
-
 #SAVE_PATH=$HOME/data/colosseum_training_dataset
-NUMBER_OF_EPISODES=100
-IMAGE_SIZE=(256 256)
-MAX_ATTEMPTS=20
-SEED=42
-USE_SAVE_STATES="True"
-
-IMAGES_USE_RGB="True"
-IMAGES_USE_DEPTH="True"
-IMAGES_USE_MASK="True"
-IMAGES_USE_POINTCLOUD="False"
-
-CAMERAS_USE_LEFT_SHOULDER="True"
-CAMERAS_USE_RIGHT_SHOULDER="True"
-CAMERAS_USE_OVERHEAD="False"
-CAMERAS_USE_WRIST="True"
-CAMERAS_USE_FRONT="True"
-
     #--container-mounts $HOME/robot-colosseum:/home/jeszhang/robot-colosseum,$HOME/data/:/home/jeszhang/data/,/tmp/.X11-unix:/tmp/.X11-unix,$HOME/.Xauthority:/home/.Xauthority \
                 #bash -c "cd ../robot-colosseum && conda run --no-capture-output -n 3d_diffuser_actor xvfb-run -a /bin/bash collect_training_dataset.sh $task"
 	#bash -c "cd ../robot-colosseum && xvfb-run -a bash collect_training_dataset.sh $task"

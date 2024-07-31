@@ -37,27 +37,10 @@ fi
 IDX_TO_COLLECT=13 #RLBench variations only
 
 #SAVE_PATH=$HOME/data/colosseum_training_dataset
-NUMBER_OF_EPISODES=100
-IMAGE_SIZE=(256 256)
-MAX_ATTEMPTS=100
-SEED=42
-USE_SAVE_STATES="True"
-
-IMAGES_USE_RGB="True"
-IMAGES_USE_DEPTH="True"
-IMAGES_USE_MASK="True"
-IMAGES_USE_POINTCLOUD="False"
-
-CAMERAS_USE_LEFT_SHOULDER="True"
-CAMERAS_USE_RIGHT_SHOULDER="True"
-CAMERAS_USE_OVERHEAD="False"
-CAMERAS_USE_WRIST="True"
-CAMERAS_USE_FRONT="True"
-
-    #--container-mounts $HOME/robot-colosseum:/home/jeszhang/robot-colosseum,$HOME/data/:/home/jeszhang/data/,/tmp/.X11-unix:/tmp/.X11-unix,$HOME/.Xauthority:/home/.Xauthority \
-                #bash -c "cd ../robot-colosseum && conda run --no-capture-output -n 3d_diffuser_actor xvfb-run -a /bin/bash collect_training_dataset.sh $task"
-	#bash -c "cd ../robot-colosseum && xvfb-run -a bash collect_training_dataset.sh $task"
-                #--partition=grizzly,polar,polar2,polar3,polar4,batch_singlenode,interactive \ # grizzly seems to have issues with display
+#--container-mounts $HOME/robot-colosseum:/home/jeszhang/robot-colosseum,$HOME/data/:/home/jeszhang/data/,/tmp/.X11-unix:/tmp/.X11-unix,$HOME/.Xauthority:/home/.Xauthority \
+            #bash -c "cd ../robot-colosseum && conda run --no-capture-output -n 3d_diffuser_actor xvfb-run -a /bin/bash collect_training_dataset.sh $task"
+#bash -c "cd ../robot-colosseum && xvfb-run -a bash collect_training_dataset.sh $task"
+            #--partition=grizzly,polar,polar2,polar3,polar4,batch_singlenode,interactive \ # grizzly seems to have issues with display
 for task in "${tasks[@]}"
 do
     srun -A nvr_srl_simpler --gres gpu:$ngpus \
