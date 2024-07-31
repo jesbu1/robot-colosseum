@@ -35,4 +35,10 @@ class StraightenRope(Task):
 
     def get_important_objects(self) -> Tuple[str]:
         # TODO: probably need to have the whole rope...
-        return ("head", "tail")
+        return (
+            "head",
+            "tail",
+            "success_head",
+            "success_tail",
+            *(f"Joint{i}" for i in range(0, 17)),  # rope joints
+        )

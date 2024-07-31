@@ -143,6 +143,8 @@ class SetupChess(Task):
         return self.placed + 1 < self.nsetup
 
     def get_important_objects(self) -> Tuple[str]:
-        success_detectors = [detector.get_name() for detector in self.success_detectors[self.indices]]
+        success_detectors = [
+            self.success_detectors[idx].get_name() for idx in self.indices
+        ]
         target_pieces = [target.get_name() for target in self.targets]
         return (*success_detectors, *target_pieces)

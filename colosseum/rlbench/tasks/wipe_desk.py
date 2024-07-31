@@ -74,4 +74,5 @@ class WipeDesk(Task):
     def get_important_objects(self) -> Tuple[str]:
         # TODO: verify dirt boundary and dirt spots. Might not need dirt boundary or vice versa.
         dirt_spot_names = [d.get_name() for d in self.dirt_spots]
-        return (self.sponge.get_name(), *dirt_spot_names, self.b[0].get_name())
+        return (self.sponge.get_name(), *dirt_spot_names)
+        # return (self.sponge.get_name(), "dirt_boundary")

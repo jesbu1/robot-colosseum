@@ -45,7 +45,6 @@ class MeatOnGrill(Task):
     def variation_count(self) -> int:
         return 2
 
-
     def get_important_objects(self) -> Tuple[str]:
         assert self._chosen_meat is not None, "must init_task first before calling get_important_objects"
-        return ("square_ring", self._chosen_meat.get_name())
+        return ("success", self._chosen_meat.get_name())

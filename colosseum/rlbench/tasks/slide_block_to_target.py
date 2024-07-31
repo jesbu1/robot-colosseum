@@ -27,6 +27,4 @@ class SlideBlockToTarget(Task):
         return 1
 
     def get_important_objects(self) -> Tuple[str]:
-        success_detectors = [detector.get_name() for detector in self.success_detectors[self.indices]]
-        target_pieces = [target.get_name() for target in self.targets]
-        return (*success_detectors, *target_pieces)
+        return ("block", "success")

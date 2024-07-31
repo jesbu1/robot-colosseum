@@ -37,4 +37,4 @@ class TurnOvenOn(Task):
 
     def get_important_objects(self) -> Tuple[str]:
         # TODO: probably need to have more than just the oven knob? idk
-        return ("oven_knob_joint")
+        return ("oven_knob_9",)
