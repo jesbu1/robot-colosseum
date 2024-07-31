@@ -211,7 +211,11 @@ class ObservationConfigExt(ObservationConfig):
             else RenderMode.OPENGL
         )
 
-        self.object_bounding_boxes = data.object_bounding_boxes
+        self.object_bounding_boxes = (
+            data.object_bounding_boxes
+            if "object_bounding_boxes" in data
+            else False
+        )
 
 
 def check_and_make(folder: str) -> None:
