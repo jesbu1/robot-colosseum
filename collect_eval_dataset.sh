@@ -69,7 +69,7 @@ do
             data.images.depth=$IMAGES_USE_DEPTH \
             data.images.mask=$IMAGES_USE_MASK \
             data.images.point_cloud=$IMAGES_USE_POINTCLOUD \
-            data.object_bounding_boxes=$SAVE_OBJECT_BOUNDING_BOXES \
+            +data.object_bounding_boxes=$SAVE_OBJECT_BOUNDING_BOXES \
             data.cameras.left_shoulder=$CAMERAS_USE_LEFT_SHOULDER \
             data.cameras.right_shoulder=$CAMERAS_USE_RIGHT_SHOULDER \
             data.cameras.overhead=$CAMERAS_USE_OVERHEAD \
