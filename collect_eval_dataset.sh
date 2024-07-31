@@ -35,7 +35,7 @@ fi
 # idx from which to collect demos (use -1 for all idxs)
 IDX_TO_COLLECT=-1
 
-SAVE_PATH=/home/jeszhang/data/colosseum_eval_dataset
+SAVE_PATH=/home/jeszhang/data/colosseum_eval_dataset_bboxes
 NUMBER_OF_EPISODES=25
 IMAGE_SIZE=(256 256)
 MAX_ATTEMPTS=100

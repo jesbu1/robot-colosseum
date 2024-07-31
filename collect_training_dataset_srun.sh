@@ -46,7 +46,7 @@ do
     srun -A nvr_srl_simpler --gres gpu:$ngpus \
                 --mincpus=$mincpus \
                 --nodes=1 \
-                --partition=polar,polar2,polar3,polar4,interactive \
+                --partition=polar,polar2,polar3,polar4,batch_singlenode \
                 --time=4:0:0 \
                 --mem=64G \
                 --container-image /lustre/fsw/portfolios/nvr/users/$USER/cache/srl_jesse_3d_diffuser_image.sqsh \
