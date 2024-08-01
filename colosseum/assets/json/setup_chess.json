@@ -339,7 +339,7 @@
         {
             "spreadsheet_idx": 16,
             "variation_name" : "friction",
-            "enabled": true,
+            "enabled": false,
             "variations": [
                 {"type": "object_color", "name": "manip_obj_color", "enabled": false},
                 {"type": "object_color", "name": "recv_obj_color", "enabled": false},
@@ -360,7 +360,7 @@
         {
             "spreadsheet_idx": 17,
             "variation_name" : "mass",
-            "enabled": true,
+            "enabled": false,
             "variations": [
                 {"type": "object_color", "name": "manip_obj_color", "enabled": false},
                 {"type": "object_color", "name": "recv_obj_color", "enabled": false},
