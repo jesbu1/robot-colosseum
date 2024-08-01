@@ -35,7 +35,7 @@ COLLECTION_STRATEGY_CONFIG = os.path.join(
     CURRENT_DIR, "data_collection_strategy.json"
 )
 
-MAX_ATTEMPTS = 10
+MAX_ATTEMPTS = 100
 PROCESS_BUDGET = 5
 
 # Index for the case of all rlbench variations mixed
