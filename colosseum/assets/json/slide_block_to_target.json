@@ -38,8 +38,8 @@
                 {"type": "distractor_object", "name": "any", "enabled": true},
                 {"type": "background_texture", "name": "any", "enabled": true},
                 {"type": "camera_pose", "name": "any", "enabled": true},
-                {"type": "object_friction", "name": "any", "enabled": true},
-                {"type": "object_mass", "name": "any", "enabled": true}
+                {"type": "object_friction", "name": "any", "enabled": false},
+                {"type": "object_mass", "name": "any", "enabled": false}
             ]
         },
         {
