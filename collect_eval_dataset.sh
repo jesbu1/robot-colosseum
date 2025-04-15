@@ -15,7 +15,6 @@ if [ $# -eq 0 ]
            "hockey"
            "meat_on_grill"
            #"move_hanger"
-           "wipe_desk"
            #"open_drawer"
            "slide_block_to_target"
            "reach_and_drag"
@@ -26,7 +25,9 @@ if [ $# -eq 0 ]
            #"turn_oven_on"
            "straighten_rope"
            "setup_chess"
-           "scoop_with_spatula")
+           "scoop_with_spatula"
+           "wipe_desk"
+   )
 else
     echo "Collectins demos from task $1"
     tasks=("$1")
@@ -76,7 +77,7 @@ do
             data.cameras.right_shoulder=$CAMERAS_USE_RIGHT_SHOULDER \
             data.cameras.overhead=$CAMERAS_USE_OVERHEAD \
             data.cameras.wrist=$CAMERAS_USE_WRIST \
-            data.cameras.front=$CAMERAS_USE_FRONT
+            data.cameras.front=$CAMERAS_USE_FRONT &
     # Increment current_jobs and wait if we've hit the max
     ((current_jobs++))
     if ((current_jobs >= max_jobs)); then
