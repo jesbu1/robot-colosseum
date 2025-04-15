@@ -7,23 +7,23 @@ if [ $# -eq 0 ]
   then
     echo "Collecting demos from all tasks"
 
-    tasks=("basketball_in_hoop"
+    tasks=(#"basketball_in_hoop"
            "close_box"
            "close_laptop_lid"
-           "empty_dishwasher"
-           "get_ice_from_fridge"
+           #"empty_dishwasher"
+           #"get_ice_from_fridge"
            "hockey"
            "meat_on_grill"
-           "move_hanger"
+           #"move_hanger"
            "wipe_desk"
-           "open_drawer"
+           #"open_drawer"
            "slide_block_to_target"
            "reach_and_drag"
            "put_money_in_safe"
            "place_wine_at_rack_location"
            "insert_onto_square_peg"
            "stack_cups"
-           "turn_oven_on"
+           #"turn_oven_on"
            "straighten_rope"
            "setup_chess"
            "scoop_with_spatula")
@@ -35,10 +35,10 @@ fi
 # idx from which to collect demos (use -1 for all idxs)
 IDX_TO_COLLECT=13 #RLBench variations only
 
-SAVE_PATH=/home/jeszhang/data/colosseum_training_dataset_bboxes
+SAVE_PATH=/data/jesse/colosseum_training_dataset
 NUMBER_OF_EPISODES=100
 IMAGE_SIZE=(256 256)
-MAX_ATTEMPTS=100
+MAX_ATTEMPTS=1000
 SEED=42
 USE_SAVE_STATES="True"
 
@@ -46,14 +46,16 @@ IMAGES_USE_RGB="True"
 IMAGES_USE_DEPTH="True"
 IMAGES_USE_MASK="False"
 IMAGES_USE_POINTCLOUD="False"
-SAVE_OBJECT_BOUNDING_BOXES="True"
+SAVE_OBJECT_BOUNDING_BOXES="False"
 
-CAMERAS_USE_LEFT_SHOULDER="True"
-CAMERAS_USE_RIGHT_SHOULDER="True"
+CAMERAS_USE_LEFT_SHOULDER="False"
+CAMERAS_USE_RIGHT_SHOULDER="False"
 CAMERAS_USE_OVERHEAD="False"
-CAMERAS_USE_WRIST="True"
+CAMERAS_USE_WRIST="False"
 CAMERAS_USE_FRONT="True"
 
+max_jobs=6
+current_jobs=0
 for task in "${tasks[@]}"
 do
     python -m colosseum.tools.dataset_generator --config-name $task \
@@ -73,5 +75,16 @@ do
             data.cameras.right_shoulder=$CAMERAS_USE_RIGHT_SHOULDER \
             data.cameras.overhead=$CAMERAS_USE_OVERHEAD \
             data.cameras.wrist=$CAMERAS_USE_WRIST \
-            data.cameras.front=$CAMERAS_USE_FRONT
+            data.cameras.front=$CAMERAS_USE_FRONT &
+
+    # Increment current_jobs and wait if we've hit the max
+    ((current_jobs++))
+    if ((current_jobs >= max_jobs)); then
+        wait -n  # Wait for at least one job to finish
+        ((current_jobs--))
+    fi
 done
+
+# Wait for all remaining background jobs to finish
+wait
+
